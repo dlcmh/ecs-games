@@ -130,6 +130,21 @@ ECS.
   object, execution input, presentation configuration, transient buffer, build concern —
   and why it cannot be an ECS element.
 
+### Rule 5 — Plain speech
+
+The article should read like one person explaining the work to another, not like a paper
+abstract.
+
+- Use concrete nouns and active verbs: "the loop calls the systems", not "the systems are
+  invoked by the loop".
+- Never explain by tautology. "A program that shows something needs somewhere to show it"
+  says nothing; "the square has to be drawn into a window" says what the window is for.
+- Drop stiff connectives and nominalisations: thus, hence, thereby, whereby, whilst,
+  "the implementation of", "the utilisation of", "in order to".
+- Prefer "is" and "does" to "constitutes" and "performs". Contractions are allowed where
+  they read naturally.
+- This rule governs how things are said, not what is said; Rule 1 still decides what belongs.
+
 ## Teaching code
 
 Separate from the README rules, the source itself must stay teachable.
