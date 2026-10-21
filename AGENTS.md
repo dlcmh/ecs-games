@@ -58,6 +58,41 @@ has to ask for.** When a game is added, ship its editor configuration in the sam
 - A game that builds but squiggles is not done. Verify with
   `clangd --check=<file>` on each source file before calling it finished.
 
+## Game README pedagogy
+
+These rules govern every game's `README.md`. They accumulate: a new rule is appended when it
+is agreed, and existing READMEs are brought into line when that happens.
+
+### Rule 1 — No fluff
+
+Every sentence must state a requirement, a behaviour, a mechanism, or a fact about the
+code. Delete anything else.
+
+Specifically forbidden:
+
+- Rhetorical questions as section headings or transitions ("Why not just a `Square` class?").
+- Motivational or reassuring lines ("this is the important part", "the lesson is…",
+  "notice how…", "the square is the smallest payload that proves it works").
+- Restating the same idea in a second register — one precise statement, not a plain one
+  plus a clever one.
+- Forward references to games not yet written, or claims about how "this will matter later".
+- Analogies that do not carry a testable claim (an analogy is allowed only if it states
+  something exact, such as the database/primary-key mapping).
+- Second-person instructions outside the exercises section.
+- Adjectives about the design (elegant, clean, honest, powerful).
+
+Use concrete numbers, symbol names, file paths, and commands instead. If a sentence can be
+deleted with no loss of information, it should be.
+
+### Rule 2 — State the original requirements
+
+The README opens with a short, simplified statement of what the user originally asked for,
+before any explanation of the implementation. Bullet points, no interpretation, no
+justification. Repository-wide constraints (no engine, `make run`, inspector, size) are a
+separate list, so the user's request is not blended with later additions.
+
+### Rule 3 — (to be added)
+
 ## Environment
 
 - Approval prompts are disabled in agent sessions; never request sandbox escalation.
