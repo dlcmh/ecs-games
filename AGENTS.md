@@ -145,6 +145,17 @@ abstract.
   they read naturally.
 - This rule governs how things are said, not what is said; Rule 1 still decides what belongs.
 
+### Rule 6 — No code excerpts
+
+The article names code; it does not reproduce it.
+
+- No fenced code blocks, no copied struct definitions, no function signatures, no
+  line-by-line walkthroughs, no pseudocode.
+- Refer to identifiers as inline code: `rotationSystem`, `Spin::radiansPerSecond`,
+  `World::transforms`.
+- Describe what the named thing does in a sentence. The reader opens the file for the body.
+- Commands such as `make run` stay inline as well.
+
 ## Teaching code
 
 Separate from the README rules, the source itself must stay teachable.
