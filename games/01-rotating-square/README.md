@@ -26,19 +26,25 @@ Close the window or press ⌘Q to quit (`make clean` removes `build/`).
 only file that knows a window exists. That split is the thing to protect: the ECS hands
 the platform layer a list of quads and nothing else.
 
-### Editor warnings
+### Editor setup
 
-If VS Code underlines the structured bindings in `game.cpp` with *"decomposition
-declarations are a C++17 extension"*, its language engine is parsing as C++14 — the
-default it falls back to without a compilation database. `make` is unaffected: it passes
-`-std=c++20`. Two files silence it:
+The compiler flags live in the `Makefile`, which editors do not read. Two editor-side
+files restate the ones that matter, or the squiggles lie about code that builds fine:
 
-- `compile_flags.txt` (here) — read by clangd, which searches upward from the source file.
-- `.vscode/c_cpp_properties.json` (repo root) — read by Microsoft's C/C++ extension, which
-  sets `"cppStandard": "c++20"`.
+- `compile_flags.txt` (here) — `-std=c++20` and `-fobjc-arc`, for clangd, which searches
+  upward from the source file.
+- `.vscode/c_cpp_properties.json` (repo root) — `"cppStandard": "c++20"` and
+  `"compilerArgs": ["-fobjc-arc"]`, for Microsoft's C/C++ extension.
 
-Reproduce the confusion deliberately to see it: `c++ -std=c++14 -Isrc -fsyntax-only
-src/game.cpp` emits exactly those warnings; `-std=c++20` is clean.
+Without them, two false alarms appear:
+
+- **"decomposition declarations are a C++17 extension"** in `game.cpp` — the engine fell
+  back to C++14. Reproduce with `c++ -std=c++14 -Isrc -fsyntax-only src/game.cpp`.
+- **"cannot create __weak reference in file using manual reference counting"** in
+  `main.mm` — the engine did not apply ARC, so `__weak GameController*` is illegal.
+  Reproduce with `c++ -std=c++20 -Isrc -fsyntax-only -x objective-c++ src/main.mm`;
+  adding `-fobjc-arc` clears it. ARC is optional per translation unit, which is why the
+  flag cannot be inferred from the file extension.
 
 ## How the four nouns map onto the code
 
