@@ -95,38 +95,19 @@ points, no interpretation, no justification. The section ends there.
 - Repository-wide constraints (no engine, `make run`, size) are a separate list, so the
   user's request is not blended with later additions.
 
-### Rule 3 — Code stays minimal; the mechanism is the lesson
+## Teaching code
 
-The source is teaching material. Do not add defensive guards, validation, feature flags,
-debug modes, or convenience features that are not part of the concept being demonstrated.
+Separate from the README rules, the source itself must stay teachable.
 
-- Guards that express the mechanism stay: the `find`/`continue` join, the `dt` clamp that
-  keeps integration stable, the `const` that declares read-only access.
-- Guards that only protect against states the game cannot reach are noise: null checks on
-  references, "does this entity exist" tests before using a handle just created, bounds
-  checks on fixed-size loops, error strings for impossible failures.
-- Tooling is not part of the paradigm. Inspectors, overlays, and debug menus are written
-  when a bug requires them, not in advance.
-- If a line exists to make the code feel robust rather than to show an ECS mechanism,
-  delete it.
-
-### Rule 4 — Happy path first
-
-The first version of a concept shows only the code needed to make the happy path work.
-
-- Do not pre-emptively defend against undefined behaviour, invalid input, integer
-  overflow, null dereference, failed allocation, or concurrent misuse.
-- Do not add comments warning that the code is "unsafe in production" or "would need
-  checking in real code". That is a different lesson.
-- Teaching addition is `a + b`, not overflow-checked builtins. Teaching indexing is
-  `xs[i]`, not bounds checking. The hazard is taught when the hazard is the lesson.
-- The same applies to README prose: describe what the code does, not the failure modes it
-  deliberately omits.
-
-Boundary with Rule 3: Rule 3 forbids guards against states the game cannot reach. Rule 4
-forbids guards against states that are reachable but belong to a later lesson. Both keep
-the current lesson visible; neither forbids teaching the hazard later, with its own code
-and its own test.
+- Keep it minimal: only what the concept needs. Guards that express the mechanism stay
+  (the join, the `dt` clamp, `const` access); guards against states the game cannot reach
+  go. Tooling — inspectors, overlays, debug menus — arrives when a bug requires it.
+- Happy path first: no pre-emptive defense against undefined behaviour, invalid input,
+  overflow, null dereference, allocation failure, or misuse; no "unsafe in production"
+  comments. Teaching addition is `a + b`, not overflow-checked builtins. A hazard is taught
+  when the hazard is the lesson.
+- Both points keep the current lesson visible. Neither forbids teaching the hazard later,
+  with its own code.
 
 ## Environment
 
