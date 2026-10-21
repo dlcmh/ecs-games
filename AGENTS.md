@@ -106,6 +106,24 @@ debug modes, or convenience features that are not part of the concept being demo
 - If a line exists to make the code feel robust rather than to show an ECS mechanism,
   delete it.
 
+### Rule 4 — Happy path first
+
+The first version of a concept shows only the code needed to make the happy path work.
+
+- Do not pre-emptively defend against undefined behaviour, invalid input, integer
+  overflow, null dereference, failed allocation, or concurrent misuse.
+- Do not add comments warning that the code is "unsafe in production" or "would need
+  checking in real code". That is a different lesson.
+- Teaching addition is `a + b`, not overflow-checked builtins. Teaching indexing is
+  `xs[i]`, not bounds checking. The hazard is taught when the hazard is the lesson.
+- The same applies to README prose: describe what the code does, not the failure modes it
+  deliberately omits.
+
+Boundary with Rule 3: Rule 3 forbids guards against states the game cannot reach. Rule 4
+forbids guards against states that are reachable but belong to a later lesson. Both keep
+the current lesson visible; neither forbids teaching the hazard later, with its own code
+and its own test.
+
 ## Environment
 
 - Approval prompts are disabled in agent sessions; never request sandbox escalation.
