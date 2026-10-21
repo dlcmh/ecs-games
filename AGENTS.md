@@ -165,6 +165,23 @@ before they have met the things it counts.
 - No collective nouns, no counts of concepts, no unexplained acronyms.
 - If a sentence only works because of the group name, rewrite the sentence.
 
+### Rule 8 — Explain by construction
+
+Build the explanation the way the program was built: state the goal, name the parts it
+needs, then classify each part.
+
+- Put the need before the verdict: "to show the square we need a window" comes before "the
+  window is a platform object".
+- Then give the verdict and the reason in that order: "it's an entity, because it's the
+  thing that exists and can be referred to on its own".
+- Write as the builder: "we need", "we pick", "we make this a component". First-person
+  plural carries the explanations; second person stays for exercises.
+- Don't compress a decision into a label. "'Shows' splits in two, one half inside ECS and
+  one outside" states the conclusion with the reasoning removed. Say what each half does and
+  why it lands where it does.
+- Discourse markers that mark a step — "so", "now", "then", "well" — carry the reasoning and
+  are not fluff.
+
 ## Teaching code
 
 Separate from the README rules, the source itself must stay teachable.
