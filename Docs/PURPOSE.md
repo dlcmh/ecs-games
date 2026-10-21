@@ -169,6 +169,10 @@ from scratch in a new directory, using the same four nouns. Finishing one game a
 stopping would fail this document's purpose — it would reproduce the original failure at
 a larger scale.
 
+Granularity — what deserves to be an entity at all, and what is level data or a resource —
+is a decision every game reopens. The working rule is recorded in
+[`NOTES-entity-granularity.md`](NOTES-entity-granularity.md).
+
 ## 6. Scaling the paradigm: one square to AAA
 
 The repository's learning curve is the ladder below. It is not a reading list; it is a
