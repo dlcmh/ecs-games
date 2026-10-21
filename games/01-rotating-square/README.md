@@ -36,23 +36,21 @@ an entity because it has no identity and nothing iterates over rotations as a se
 "Slowly" hides two elements. The behaviour is the system; the pace is data,
 `Spin::radiansPerSecond`, set to 20 degrees per second by `spawnSquare`. The rate is a
 component because it varies per entity and the system must accept any value, including zero
-and negative values; the system is generic, the pace is specific. Putting the rate inside
-the system would make every square turn identically and require editing the system to change
-one of them.
+and negative values. Putting the rate inside the system would make every square turn
+identically and require editing the system to change one of them.
 
-The window is outside ECS. It is an AppKit object owned by `GameController`, with an
+The window is outside ECS. It is a platform object owned by `GameController`, with an
 OS-defined lifetime, exactly one instance, and no per-instance iteration; no system queries
-it. It is a platform object, and the four nouns have no place for it.
+it.
 
 The clock is outside ECS. `dt` arrives as an argument to every system, derived from
 `CFAbsoluteTimeGetCurrent()` in `-tick`. It is not a component, because it is not attached
 to an entity; not a system, because it does no work; not the world, because it does not
-contain anything. It is an execution input, shared by every system on every frame.
+contain anything. It is an execution input.
 
 The frame loop is outside ECS. `NSTimer` fires sixty times a second, `-tick` measures the
 elapsed time, calls the systems in a fixed order, and asks the view to redraw. Ordering is a
-property of the execution model, and the four nouns do not express it: ECS supplies the
-things to run, the loop supplies when and in what order.
+property of the execution model, which the four nouns do not express.
 
 "Shows" splits into a part inside ECS and a part outside it. Selecting what to draw is
 `renderSystem`, which iterates entities that have a `Transform` and an `Rgba` and emits a
@@ -67,18 +65,14 @@ when the window is constructed; neither has behaviour or identity, and no system
 They are presentation configuration.
 
 `World` is not an element of the requirement. It is the container that holds the elements:
-three maps keyed by entity ID plus the counter that issues IDs. It is ECS infrastructure,
-answering where state lives rather than what the game is.
+three maps keyed by entity ID plus the counter that issues IDs. It is ECS infrastructure.
 
 "Launchable" is outside ECS entirely. It names the entry point in `main`, the build command
-in the `Makefile`, and the process lifecycle AppKit manages. Build and startup concerns do
-not become entities, components, or systems.
+in the `Makefile`, and the process lifecycle AppKit manages.
 
 The classification follows three tests and one exclusion. An element that needs independent
 identity, lifetime, and iteration is an entity; per-entity data is a component; behaviour
 over a set is a system; the container that holds them is the world. Anything single,
-platform-bound, execution-bound, or configuration is outside ECS, and the article states it
-as such rather than forcing it into a noun it does not fit. Some calls are judgement rather
-than derivation: the square could be modelled as one entity holding a list of squares, and
-the colour could be a constant inside the renderer. The decomposition records the choice and
-the reason, which is what makes the code readable later.
+platform-bound, execution-bound, or configuration is outside ECS. Some calls are judgement
+rather than derivation: the square could be modelled as one entity holding a list of squares,
+and the colour could be a constant inside the renderer.

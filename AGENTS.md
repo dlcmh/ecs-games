@@ -74,7 +74,8 @@ Specifically forbidden:
 - Motivational or reassuring lines ("this is the important part", "the lesson is…",
   "notice how…", "the square is the smallest payload that proves it works").
 - Restating the same idea in a second register — one precise statement, not a plain one
-  plus a clever one.
+  plus a clever one. "The window is outside ECS" already says it; a following "the four
+  nouns have no place for it" adds words but no information.
 - Forward references to games not yet written, or claims about how "this will matter later".
 - Analogies that do not carry a testable claim (an analogy is allowed only if it states
   something exact, such as the database/primary-key mapping).
