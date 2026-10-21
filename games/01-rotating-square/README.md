@@ -11,14 +11,14 @@ Original request, simplified:
   systems are functions, world is the container.
 
 Repository constraints from [`Docs/PURPOSE.md`](../../Docs/PURPOSE.md): no engine or
-framework; macOS SDK only; `make run`; an entity inspector; roughly 1,000 lines.
+framework; macOS SDK only; `make run`; roughly 1,000 lines.
 
 ## Behaviour
 
 - 720×720 window, black background.
 - One entity: a 240×240 orange square at the centre, angle increasing 20°/s.
 - 60 Hz timer (`NSTimer`, 1/60 s). `dt` is clamped to 50 ms.
-- Window close or ⌘Q terminates. `I` prints the world to stdout.
+- Window close or ⌘Q terminates.
 
 ```sh
 make run
@@ -28,9 +28,9 @@ make run
 
 | File | Lines | Contents |
 |---|---|---|
-| `src/ecs.hpp` | 112 | Entity alias, three components, `World`, `RenderList`, declarations |
-| `src/game.cpp` | 78 | Two systems, spawn helper, entity inspector |
-| `src/main.mm` | 183 | Window, view, timer, game loop |
+| `src/ecs.hpp` | 105 | Entity alias, three components, `World`, `RenderList`, declarations |
+| `src/game.cpp` | 49 | Two systems, spawn helper |
+| `src/main.mm` | 169 | Window, view, timer, game loop |
 | `Makefile` | 17 | Compile command |
 | `compile_flags.txt` | 2 | Editor flags |
 
@@ -92,19 +92,6 @@ At 20°/s the angular velocity is `20 × π / 180 = 0.3491` rad/s. One tick at 6
 System order is literal in `-tick`, not discovered from a registry. Rendering before
 rotating would draw the previous frame's angle.
 
-## Inspector
-
-`I` calls `printWorld`, which iterates `transforms` and prints every component row for each
-ID. Output for the starting state after one tick:
-
-```
-world: transforms=1 spins=1 colours=1
-entity 1   Transform{x=0.0 y=0.0 angle=0.006rad halfSize=120.0} Spin{0.349 rad/s} Rgba{r=0.95 g=0.55 b=0.20 a=1.00}
-```
-
-`printWorld` and `printEntity` are free functions that read only. They are not systems: they
-run on a keypress, not every frame.
-
 ## Is ECS only four nouns
 
 No. The four nouns describe storage and ownership; they do not describe selection or
@@ -146,8 +133,7 @@ Each states the edit and the result.
 - **Second square.** Call `spawnSquare` twice with different positions and colours. Both
   systems compile unchanged; two quads are emitted.
 - **Static square.** Spawn two entities, then `world.spins.erase(second)`. `rotationSystem`
-  skips the second; `renderSystem` still draws it. Press `I`: the second entity has no
-  `Spin`.
+  skips the second; `renderSystem` still draws it.
 - **Reverse rotation.** Change `20.0f` to `-20.0f` in `spawnSquare`. The angle decreases;
   no branch changes.
 - **Remove the `dt` clamp.** Allow 5 s `dt` and drag the window. The square jumps by

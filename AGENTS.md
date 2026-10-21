@@ -33,7 +33,7 @@ Key constraints from that charter:
 - No generic ECS. No templates, archetypes, sparse sets, or plugin registries.
 - No engine, no shared game library, no reusable ECS before a third game exists.
 - Systems are free functions, invoked in a hardcoded order in the game loop.
-- Each game: one directory, roughly 1,000 lines, `make run`, with an entity inspector.
+- Each game: one directory, roughly 1,000 lines, `make run`.
 - Copy-paste between games is correct until the same code appears three times.
 - Lifting a red line requires the forcing game to exist and the lift to be recorded in
   the charter.
@@ -88,10 +88,23 @@ deleted with no loss of information, it should be.
 
 The README opens with a short, simplified statement of what the user originally asked for,
 before any explanation of the implementation. Bullet points, no interpretation, no
-justification. Repository-wide constraints (no engine, `make run`, inspector, size) are a
+justification. Repository-wide constraints (no engine, `make run`, size) are a
 separate list, so the user's request is not blended with later additions.
 
-### Rule 3 — (to be added)
+### Rule 3 — Code stays minimal; the mechanism is the lesson
+
+The source is teaching material. Do not add defensive guards, validation, feature flags,
+debug modes, or convenience features that are not part of the concept being demonstrated.
+
+- Guards that express the mechanism stay: the `find`/`continue` join, the `dt` clamp that
+  keeps integration stable, the `const` that declares read-only access.
+- Guards that only protect against states the game cannot reach are noise: null checks on
+  references, "does this entity exist" tests before using a handle just created, bounds
+  checks on fixed-size loops, error strings for impossible failures.
+- Tooling is not part of the paradigm. Inspectors, overlays, and debug menus are written
+  when a bug requires them, not in advance.
+- If a line exists to make the code feel robust rather than to show an ECS mechanism,
+  delete it.
 
 ## Environment
 

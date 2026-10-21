@@ -19,9 +19,8 @@ same four nouns — entities are IDs, components are data, systems are functions
 the container — which is what makes the climb continuous instead of a series of rewrites.
 
 What every game here looks like at the current rungs: one self-contained directory,
-roughly 1,000 lines, `make run`, a tiny hand-written ECS, systems called in a hardcoded
-order, and an entity inspector built on day one. No engine, no shared library, no
-templates.
+roughly 1,000 lines, `make run`, a tiny hand-written ECS, and systems called in a
+hardcoded order. No engine, no shared library, no templates.
 
 See [`Docs/PURPOSE.md`](Docs/PURPOSE.md) for the full charter, the scaling ladder, and the
 rules that keep the scaffolding from becoming the product.

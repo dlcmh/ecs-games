@@ -107,8 +107,9 @@ new from scratch.
   architectural churn, not domain learning. Every game brings its own domain problem,
   and that problem is the point.
 - **Easy debugging by default.** In OOP one breaks inside `Enemy::update`. In ECS one
-  must ask which system touches an entity, and in what order. That is why the entity
-  inspector exists from day one of every game.
+  must ask which system touches an entity, and in what order. A small inspector helps
+  when that question arises; it is debugging tooling, not part of the paradigm, and it
+  is written when a bug demands it.
 - **Performance for free.** A map per component is the right first implementation and
   the wrong last one. Which one you need is a question for a profiler, not for
   convention — see §6.
@@ -131,8 +132,9 @@ Every game follows the same build order:
 3. **Use existing intuition for the tricky parts.** Biological and web-pipeline
    analogies carry reasoning when the code is unfamiliar: decay timers are hormone
    curves, spawn delays are refractory periods, lookahead is feed-forward prediction.
-4. **Build the entity inspector on day one** — `printEntity(world, id)` dumping all
-   components. About 20 lines; analogous to logging request IDs in a web pipeline.
+4. **Build the entity inspector when the first bug needs it** — `printEntity(world, id)`
+   dumping all components. About 20 lines, analogous to logging request IDs in a web
+   pipeline. Writing it before a bug exists adds branches with nothing to teach.
 5. **When ECS handles something awkwardly**, that is the lesson. It teaches the boundary
    of the paradigm better than any tutorial, and the boundary is knowledge the next game
    inherits.
@@ -268,7 +270,7 @@ Required:
 - ✅ Entities as `uint32_t`, components as plain structs, systems as free functions, one
   `World` struct holding the maps — re-derived per game until the rule of three allows
   otherwise.
-- ✅ An entity inspector in every game.
+- ✅ An inspector only once a bug needs one.
 - ✅ Hardcoded system order in the game loop — `movement(); collision();` — not a plugin
   registry.
 
@@ -304,7 +306,7 @@ Per game:
 - The game runs and is playable.
 - Approximately 1,000 lines, one directory, `make run`.
 - System order visible and hardcoded in the main loop (until §6 says otherwise).
-- An entity inspector reachable while the game runs.
+- An inspector if, and only if, a bug required one.
 - Every line readable in one sitting; no hidden control flow.
 - No `Docs/` folder inside the game's directory.
 
