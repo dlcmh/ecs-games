@@ -102,11 +102,4 @@ void rotationSystem(World& world, float dt);
 // so it takes a const reference — that constness is the access declaration.
 void renderSystem(const World& world, RenderList& out);
 
-// ---------------------------------------------------------------------------
-// Entity inspector. Not a system: it runs on a keypress, not every frame, and it only
-// reads. Prints one entity's components, then every entity in the world.
-// ---------------------------------------------------------------------------
-void printEntity(const World& world, Entity entity);
-void printWorld(const World& world);
-
 }  // namespace ecs

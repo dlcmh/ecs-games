@@ -17,24 +17,12 @@
 
 @interface GameView : NSView
 @property(nonatomic) const ecs::RenderList* renderList;
-@property(nonatomic) const ecs::World* world;
 @end
 
 @implementation GameView
 
 - (BOOL)isOpaque {
     return YES;
-}
-
-- (BOOL)acceptsFirstResponder {
-    return YES;
-}
-
-// Entity inspector: press I to dump the world to stdout.
-- (void)keyDown:(NSEvent*)event {
-    if ([[event charactersIgnoringModifiers] isEqualToString:@"i"] && self.world != nullptr) {
-        ecs::printWorld(*self.world);
-    }
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
@@ -101,9 +89,7 @@
 
     _view = [[GameView alloc] initWithFrame:content];
     _view.renderList = &_renderList;
-    _view.world = &_world;
     _window.contentView = _view;
-    [_window makeFirstResponder:_view];
 
     [self installMenu];
     [_window makeKeyAndOrderFront:nil];
@@ -118,7 +104,7 @@
                                                  [weakSelf tick];
                                                }];
 
-    std::printf("rotating-square: I = inspect world, close the window or press Command-Q to quit.\n");
+    std::printf("rotating-square: close the window or press Command-Q to quit.\n");
     std::fflush(stdout);
 }
 

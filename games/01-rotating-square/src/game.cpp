@@ -3,7 +3,6 @@
 #include "ecs.hpp"
 
 #include <cmath>
-#include <cstdio>
 
 namespace ecs {
 namespace {
@@ -45,34 +44,6 @@ void renderSystem(const World& world, RenderList& out) {
         out.push_back(Quad{transform.x, transform.y, transform.halfSize, transform.angle,
                            colour->second});
     }
-}
-
-void printEntity(const World& world, Entity entity) {
-    std::printf("entity %-3u", entity);
-
-    if (const auto it = world.transforms.find(entity); it != world.transforms.end()) {
-        const Transform& t = it->second;
-        std::printf(" Transform{x=%.1f y=%.1f angle=%.3frad halfSize=%.1f}", t.x, t.y,
-                    t.angle, t.halfSize);
-    }
-    if (const auto it = world.spins.find(entity); it != world.spins.end()) {
-        std::printf(" Spin{%.3f rad/s}", it->second.radiansPerSecond);
-    }
-    if (const auto it = world.colours.find(entity); it != world.colours.end()) {
-        const Rgba& c = it->second;
-        std::printf(" Rgba{r=%.2f g=%.2f b=%.2f a=%.2f}", c.r, c.g, c.b, c.a);
-    }
-    std::printf("\n");
-}
-
-void printWorld(const World& world) {
-    std::printf("world: transforms=%zu spins=%zu colours=%zu\n",
-                world.transforms.size(), world.spins.size(), world.colours.size());
-    for (const auto& [entity, transform] : world.transforms) {
-        (void)transform;
-        printEntity(world, entity);
-    }
-    std::fflush(stdout);
 }
 
 }  // namespace ecs
