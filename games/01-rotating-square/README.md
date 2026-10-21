@@ -2,13 +2,7 @@
 
 ## Requirements
 
-Original request, simplified:
-
 - A launchable C++ program that shows a slowly rotating square.
-- The folder name is chosen by the implementer.
-- The README maps ECS concepts to the parts of the code.
-- The README answers whether ECS is only four nouns: entities are IDs, components are data,
-  systems are functions, world is the container.
 
 ## Constraints
 

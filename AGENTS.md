@@ -84,12 +84,16 @@ Specifically forbidden:
 Use concrete numbers, symbol names, file paths, and commands instead. If a sentence can be
 deleted with no loss of information, it should be.
 
-### Rule 2 — State the original requirements
+### Rule 2 — State the game's requirements, then stop
 
-The README opens with a short, simplified statement of what the user originally asked for,
-before any explanation of the implementation. Bullet points, no interpretation, no
-justification. Repository-wide constraints (no engine, `make run`, size) are a
-separate list, so the user's request is not blended with later additions.
+The README opens with what the game must do, as stated in the original request. Bullet
+points, no interpretation, no justification. The section ends there.
+
+- Requirements are about the game: what it must show or do.
+- Meta-requirements do not belong here: how the README is structured, what the folder is
+  named, or what the repository process requires.
+- Repository-wide constraints (no engine, `make run`, size) are a separate list, so the
+  user's request is not blended with later additions.
 
 ### Rule 3 — Code stays minimal; the mechanism is the lesson
 
