@@ -86,14 +86,25 @@ deleted with no loss of information, it should be.
 
 ### Rule 2 — State the game's requirements, then stop
 
-The README opens with what the game must do, as stated in the original request. Bullet
-points, no interpretation, no justification. The section ends there.
+The README opens with what the game must do, as stated in the original request, in plain
+prose (Rule 3). No interpretation, no justification. The section ends there.
 
 - Requirements are about the game: what it must show or do.
 - Meta-requirements do not belong here: how the README is structured, what the folder is
   named, or what the repository process requires.
-- Repository-wide constraints (no engine, `make run`, size) are a separate list, so the
-  user's request is not blended with later additions.
+- Repository-wide constraints (no engine, `make run`, size) are a separate paragraph, so
+  the user's request is not blended with later additions.
+
+### Rule 3 — Prose only
+
+Deliver every section as plain paragraphs. No bullet points, numbered lists, tables,
+checklists, or definition lists. Identifiers, paths, and commands stay inline in the
+sentence as code spans.
+
+A thought that arrives as a list is written as sentences: an enumeration becomes a run of
+clauses ("the four nouns are entities, components, systems, and world"), a sequence becomes
+one paragraph naming the order, and a mapping states both sides in the same sentence. If a
+paragraph needs a sub-point, it becomes another paragraph, not an indented dash.
 
 ## Teaching code
 
