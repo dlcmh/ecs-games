@@ -86,8 +86,9 @@ deleted with no loss of information, it should be.
 
 ### Rule 2 — State the game's requirements, then stop
 
-The README opens with what the game must do, as stated in the original request, in plain
-prose (Rule 3). No interpretation, no justification. The section ends there.
+The README opens with what the game must do, as stated in the original request, written as
+the article's opening paragraph under no heading (Rule 3). No interpretation, no
+justification. The opening ends there.
 
 - Requirements are about the game: what it must show or do.
 - Meta-requirements do not belong here: how the README is structured, what the folder is
@@ -95,16 +96,17 @@ prose (Rule 3). No interpretation, no justification. The section ends there.
 - Repository-wide constraints (no engine, `make run`, size) are a separate paragraph, so
   the user's request is not blended with later additions.
 
-### Rule 3 — Prose only
+### Rule 3 — Long-form article
 
-Deliver every section as plain paragraphs. No bullet points, numbered lists, tables,
-checklists, or definition lists. Identifiers, paths, and commands stay inline in the
-sentence as code spans.
+The README is one long-form article: a title, then paragraphs. Structure comes from the order
+of the paragraphs, not from section headings.
 
-A thought that arrives as a list is written as sentences: an enumeration becomes a run of
-clauses ("the four nouns are entities, components, systems, and world"), a sequence becomes
-one paragraph naming the order, and a mapping states both sides in the same sentence. If a
-paragraph needs a sub-point, it becomes another paragraph, not an indented dash.
+- No headings below the title. No bullet points, numbered lists, tables, checklists,
+  definition lists, or block quotes.
+- Identifiers, paths, and commands stay inline as code spans.
+- An enumeration becomes a run of clauses ("the four nouns are entities, components,
+  systems, and world"); a sequence becomes one paragraph naming the order; a mapping states
+  both sides in the same sentence; a sub-point becomes another paragraph.
 
 ## Teaching code
 
