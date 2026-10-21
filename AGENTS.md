@@ -18,10 +18,11 @@ This repository is a workshop for building **a series of games from scratch, eac
 of the ECS paradigm**. The goal is the paradigm and the ability to start the next game in
 an empty directory with no engine and no tutorial — not any single game.
 
-Pac-Man is the **first exercise, not the objective**. It is a vehicle for learning the
+Pac-Man is the **next exercise, not the objective**. It is a vehicle for learning the
 method; finishing it is a milestone, and stopping there fails the purpose. Each game
-lives in its own directory. Read [`Docs/PURPOSE.md`](Docs/PURPOSE.md) before making design
-decisions — it is the charter, and it takes precedence over convenience.
+lives in its own directory under `games/`, numbered in build order. Read
+[`Docs/PURPOSE.md`](Docs/PURPOSE.md) before making design decisions — it is the charter,
+and it takes precedence over convenience.
 
 Key constraints from that charter:
 

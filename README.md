@@ -21,4 +21,5 @@ scaffolding from becoming the product.
 
 ## Status
 
-No games yet. The charter is written; the first exercise is Pac-Man.
+One exercise so far: [`games/01-rotating-square`](games/01-rotating-square) — a window, a
+60 Hz loop, and a square that turns because its `Spin` component says so. Pac-Man is next.

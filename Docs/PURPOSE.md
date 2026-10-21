@@ -5,7 +5,7 @@ games from scratch, each one written by hand on top of the ECS paradigm**, until
 thinking in entities, components, systems, and pipelines is the default way game code
 is written here.
 
-Pac-Man is not the goal. Pac-Man is the first exercise. It is chosen because it is
+Pac-Man is not the goal. It is the first real game. It is chosen because it is
 small, complete, and demanding in exactly the right places — target selection, mode
 state machines, a shared pathfinder, fixed-timestep movement — but it is a vehicle, not
 a destination. Finishing it is the starting line, not the finish.
@@ -130,7 +130,16 @@ Every game follows the same build order:
    of the paradigm better than any tutorial, and the boundary is knowledge the next game
    inherits.
 
-### First exercise: Pac-Man
+### Exercise 0: a rotating square
+
+Before any game logic, prove the boring layer works: a window, a 60 Hz tick, a `dt`
+clamped against stalls, and one component-driven value reaching the screen
+([`games/01-rotating-square`](../games/01-rotating-square)). Two systems, one order, no
+queries worth extracting. Its README records the one question this raised — whether ECS
+really is only four nouns — and the answer, which is that the nouns describe the data
+model and leave out queries and execution.
+
+### Next exercise: Pac-Man
 
 System order, to be written before the systems themselves:
 
@@ -265,3 +274,9 @@ For the repository:
 Meeting the Pac-Man items is the first milestone. It is not the goal, and it is not a
 reason to stop. The stopping that matters here is knowing when a *game* is complete and
 disposable; the repository itself keeps going, one small game at a time.
+
+## 10. Where the work stands
+
+- `games/01-rotating-square` — done. Window, 60 Hz loop, `Transform` + `Spin` + `Rgba`,
+  two systems, one entity. The platform layer is proven; no game logic yet.
+- Pac-Man — next, and the first exercise that involves real game domain work.
