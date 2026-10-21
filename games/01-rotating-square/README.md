@@ -20,10 +20,25 @@ Close the window or press ⌘Q to quit (`make clean` removes `build/`).
 | `src/game.cpp` | 49 | The two systems, implemented as free functions |
 | `src/main.mm` | 169 | Cocoa window, view, 60 Hz timer, the game loop |
 | `Makefile` | 17 | One compile command |
+| `compile_flags.txt` | 1 | `-std=c++20` for clangd; the editor's fallback standard otherwise rejects structured bindings |
 
 `ecs.hpp` and `game.cpp` are plain C++ — no platform types, no AppKit. `main.mm` is the
 only file that knows a window exists. That split is the thing to protect: the ECS hands
 the platform layer a list of quads and nothing else.
+
+### Editor warnings
+
+If VS Code underlines the structured bindings in `game.cpp` with *"decomposition
+declarations are a C++17 extension"*, its language engine is parsing as C++14 — the
+default it falls back to without a compilation database. `make` is unaffected: it passes
+`-std=c++20`. Two files silence it:
+
+- `compile_flags.txt` (here) — read by clangd, which searches upward from the source file.
+- `.vscode/c_cpp_properties.json` (repo root) — read by Microsoft's C/C++ extension, which
+  sets `"cppStandard": "c++20"`.
+
+Reproduce the confusion deliberately to see it: `c++ -std=c++14 -Isrc -fsyntax-only
+src/game.cpp` emits exactly those warnings; `-std=c++20` is clean.
 
 ## How the four nouns map onto the code
 

@@ -101,7 +101,9 @@ DerivedData/
 *.xcodeproj/project.xcworkspace/xcuserdata/
 
 # Editors (common on macOS)
-.vscode/
+# Share the C++ language-standard config; ignore the rest of .vscode/.
+.vscode/*
+!.vscode/c_cpp_properties.json
 .idea/
 *.swp
 *~
