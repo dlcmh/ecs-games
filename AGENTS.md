@@ -74,8 +74,8 @@ Specifically forbidden:
 - Motivational or reassuring lines ("this is the important part", "the lesson is…",
   "notice how…", "the square is the smallest payload that proves it works").
 - Restating the same idea in a second register — one precise statement, not a plain one
-  plus a clever one. "The window is outside ECS" already says it; a following "the four
-  nouns have no place for it" adds words but no information.
+  plus a clever one. "The window is outside ECS" already says it; a following "ECS has no
+  home for it" adds words but no information.
 - Forward references to games not yet written, or claims about how "this will matter later".
 - Analogies that do not carry a testable claim (an analogy is allowed only if it states
   something exact, such as the database/primary-key mapping).
@@ -105,9 +105,9 @@ of the paragraphs, not from section headings.
 - No headings below the title. No bullet points, numbered lists, tables, checklists,
   definition lists, or block quotes.
 - Identifiers, paths, and commands stay inline as code spans.
-- An enumeration becomes a run of clauses ("the four nouns are entities, components,
-  systems, and world"); a sequence becomes one paragraph naming the order; a mapping states
-  both sides in the same sentence; a sub-point becomes another paragraph.
+- An enumeration becomes a run of clauses ("the stages are input, movement, collision, and
+  render"); a sequence becomes one paragraph naming the order; a mapping states both sides in
+  the same sentence; a sub-point becomes another paragraph.
 
 ### Rule 4 — Architect's decomposition
 
@@ -155,6 +155,15 @@ The article names code; it does not reproduce it.
   `World::transforms`.
 - Describe what the named thing does in a sentence. The reader opens the file for the body.
 - Commands such as `make run` stay inline as well.
+
+### Rule 7 — No taxonomy labels
+
+Do not give the paradigm a group name. "The four nouns" asks the reader to hold a taxonomy
+before they have met the things it counts.
+
+- Name the concrete element: an entity, a component, a system, the world.
+- No collective nouns, no counts of concepts, no unexplained acronyms.
+- If a sentence only works because of the group name, rewrite the sentence.
 
 ## Teaching code
 

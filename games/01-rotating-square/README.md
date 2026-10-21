@@ -42,11 +42,11 @@ it.
 
 The clock is outside ECS. `dt` reaches every system as an argument, computed from
 `CFAbsoluteTimeGetCurrent()` in `-tick`. It is not attached to an entity, it does no work,
-and it is not a container, so none of the four nouns fit. It is an input to execution.
+and it is not a container: it is an input to execution.
 
 The frame loop is outside ECS. `NSTimer` fires sixty times a second, `-tick` measures the
 time since the last frame, calls the systems in a fixed order, and asks the view to redraw.
-The four nouns say nothing about ordering; the loop decides it.
+Ordering belongs to the loop, not to ECS.
 
 "Shows" splits in two, one half inside ECS and one outside. `renderSystem` decides what to
 draw by iterating entities that have a `Transform` and an `Rgba` and emitting a `Quad` for
