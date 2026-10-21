@@ -182,6 +182,20 @@ needs, then classify each part.
 - Discourse markers that mark a step — "so", "now", "then", "well" — carry the reasoning and
   are not fluff.
 
+### Rule 9 — Talk to an audience
+
+Write as an architect presenting the design to a room, not as a specification read aloud.
+
+- Prefer speech to note form: "The sentence mentions the square and the rotation, but not the
+  clock — well, the clock happens to be required to make the rotation visible" rather than
+  "The sentence names A and B but not C".
+- Mark the beat where the audience would ask a question: "well", "of course", "turns out",
+  "happens to be", "which is why".
+- Let a sentence run to the length of a spoken breath. Three clipped declaratives in a row
+  read as a table, not an explanation.
+- The marker has to carry reasoning, not padding: "well" is allowed when it introduces the
+  answer to the objection the previous sentence raises.
+
 ## Teaching code
 
 Separate from the README rules, the source itself must stay teachable.

@@ -2,16 +2,16 @@
 
 A launchable C++ program that shows a slowly rotating square.
 
-To build that, we need a handful of things. The sentence names the square and the rotation,
-and calls the rotation slow. It doesn't name the window to draw into, the pixels to draw
-with, the clock that makes the rotation visible, the loop that ties the clock to the window,
-or the handoff that carries drawable data to the platform. Some of those are implied by what
-the sentence asks for. The rest come from experience, because a program shaped like this
-won't run without them.
+To build that we need a handful of things. The sentence mentions the square and the rotation,
+and it calls the rotation slow. It doesn't mention the window we draw into, the pixels we
+draw with, the clock that makes the rotation visible, the loop that ties the clock to the
+window, or the handoff that carries drawable data to the platform. Well, some of those are
+implied by what the sentence asks for. The rest happen to be required, because a program
+shaped like this won't run without them.
 
 The square comes first. It's an entity, because it's the thing that exists, persists across
-frames, and can be referred to on its own. The requirement asks for one; the design allows
-any number. Its identity isn't its geometry: the entity is the number `1` that
+frames, and can be referred to on its own. The requirement asks for one, though the code
+allows any number. Its identity isn't its geometry: the entity is the number `1` that
 `World::nextEntity` handed out when `spawnSquare` created it. Strip every component off
 entity `1` and the ID is still there.
 
@@ -21,9 +21,9 @@ their own. `World::transforms` holds one row per entity, and being in that map i
 having a position means.
 
 The requirement never says the square is orange; we picked orange while building it. That
-colour is another component, `Rgba`. Once it exists it's per-entity data: two squares can
-differ, it does no work, and nothing refers to it on its own. It isn't an entity because it
-has no identity or lifetime, and it isn't a system because it does nothing.
+colour is another component, `Rgba`. Once it's there it's per-entity data: two squares can
+differ, it does no work, and nothing refers to it on its own. It isn't an entity, because it
+has no identity or lifetime, and it isn't a system, because it does nothing.
 
 For the rotation itself we need a system. `rotationSystem` runs on every entity that has
 both a `Transform` and a `Spin`, adds each one's rate times `dt` to its angle, and knows
@@ -52,7 +52,7 @@ Then there's the word "shows", which needs two parts. To decide what to draw we 
 `renderSystem`: it iterates entities with a `Transform` and an `Rgba` and emits a `Quad` for
 each. Picking from a set is what makes it a system. To turn those quads into pixels,
 `-drawRect:` calls CoreGraphics, and it knows nothing about entities; drawing is platform
-code. The `RenderList` between them is rebuilt every frame and owned by the view controller.
+code. The `RenderList` in between is rebuilt every frame and owned by the view controller.
 That makes it a transient buffer, not a component, because it isn't per-entity state that
 persists, and not an entity, because nothing refers to it by identity.
 
