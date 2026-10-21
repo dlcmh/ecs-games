@@ -108,6 +108,27 @@ of the paragraphs, not from section headings.
   systems, and world"); a sequence becomes one paragraph naming the order; a mapping states
   both sides in the same sentence; a sub-point becomes another paragraph.
 
+### Rule 4 — Architect's decomposition
+
+After the requirements, the article shows how an architect breaks the requirement statement
+into elements and classifies each one, either as an ECS element or explicitly as outside
+ECS.
+
+- Begin with the elements the requirement names, then add the ones it implies but does not
+  say: a window to show in, a clock to advance the rotation, a surface to draw on, a frame
+  that ties clock to window.
+- Name which elements exist because of the architect's experience rather than the text.
+  The clock, the frame loop, and the transfer of draw data to the platform are the usual
+  cases at this size.
+- Split a requirement word that hides two elements. "Slowly rotating" contains a behaviour
+  (a system) and a rate (a component); an architect separates them before choosing code.
+- For every element state its classification and the reason: entity when it needs
+  independent identity, lifetime, and iteration; component when it is per-entity data;
+  system when it is behaviour over a set; world when it is the container.
+- "Outside ECS" is a classification, not a gap. Say what the element is instead — platform
+  object, execution input, presentation configuration, transient buffer, build concern —
+  and why it cannot be an ECS element.
+
 ## Teaching code
 
 Separate from the README rules, the source itself must stay teachable.
