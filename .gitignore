@@ -1,0 +1,107 @@
+# ---- C++ ----
+
+# Build output
+build/
+Build/
+out/
+bin/
+obj/
+*.o
+*.obj
+*.lo
+*.slo
+*.gch
+*.pch
+*.so
+*.so.*
+*.dylib
+*.dll
+*.a
+*.lib
+*.exp
+*.pdb
+*.ilk
+*.idb
+*.ipdb
+
+# Executables and libraries
+*.exe
+*.out
+*.app/
+*.dSYM/
+*.app.dSYM
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+CTestTestfile.cmake
+compile_commands.json
+build.ninja
+.ninja_deps
+.ninja_log
+CMakeUserPresets.json
+
+# Meson
+meson-private/
+meson-info/
+meson-logs/
+build.ninja
+
+# Autotools / configure
+.deps/
+.libs/
+Makefile.in
+aclocal.m4
+autom4te.cache/
+config.log
+config.status
+configure
+stamp-h1
+
+# Conan / vcpkg
+conan/
+conanbuildinfo.*
+conaninfo.txt
+.vcpkg/
+vcpkg_installed/
+
+# C++ tooling caches
+.cache/
+.clangd/
+*.gcda
+*.gcno
+*.gcov
+*.profraw
+*.profdata
+
+# ---- macOS ----
+
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.TemporaryItems
+.apdisk
+.DocumentRevisions-V100
+.com.apple.timemachine.donotpresent
+Volumes/
+
+# Xcode
+*.xcuserstate
+xcuserdata/
+DerivedData/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Editors (common on macOS)
+.vscode/
+.idea/
+*.swp
+*~
