@@ -1,11 +1,21 @@
 # Purpose
 
-This repository is a learning vehicle, not a product. Its purpose is to build one
-small, complete game — Pac-Man — using a hand-written, deliberately tiny ECS in C++,
-so that the ECS mental model can be learned by reading and changing a real game
-end-to-end.
+This repository is a workshop, not a product. Its purpose is to **build a series of
+games from scratch, each one written by hand on top of the ECS paradigm**, until
+thinking in entities, components, systems, and pipelines is the default way game code
+is written here.
 
-Everything in this document constrains what the project is allowed to become.
+Pac-Man is not the goal. Pac-Man is the first exercise. It is chosen because it is
+small, complete, and demanding in exactly the right places — target selection, mode
+state machines, a shared pathfinder, fixed-timestep movement — but it is a vehicle, not
+a destination. Finishing it is the starting line, not the finish.
+
+The durable output of this repository is not a game. It is the ability to sit down in
+an empty directory and build the next game from scratch — no engine, no framework, no
+tutorial — because the paradigm is understood well enough to be reapplied to a problem
+shape that has never been seen before.
+
+Everything in this document constrains what that work is allowed to become.
 If the code and this document disagree, this document wins.
 
 ## 1. Why ECS, and why first
@@ -32,10 +42,16 @@ Tutorial-style game code is the opposite: a god-function that grows a branch per
 entity type. That is why it fails to stick. It is not too hard; it is structured wrong
 for the reader.
 
-Therefore this project starts at ECS rather than at "level 2" and refactoring later.
+Therefore this work starts at ECS rather than at "level 2" and refactoring later.
 The "ECS is overkill for four ghosts" critique is a *cost* argument, not a *fit*
-argument — and if the cost of the alternative is abandoning the project again, then
-ECS is by far the cheaper path.
+argument — and if the cost of the alternative is abandoning the work again, then ECS is
+by far the cheaper path.
+
+The choice of ECS is also the choice of a *repeatable* method. The point of learning one
+paradigm deeply is that every subsequent game starts from the same four nouns, so
+effort goes into the game rather than into relearning an architecture. Pac-Man proves
+the method works. Game two proves it transfers. Game three proves it is a method rather
+than a coincidence.
 
 ## 2. The model to internalize
 
@@ -71,9 +87,12 @@ new from scratch.
    enforced by data layout instead of class hierarchies — the same instinct as *add a
    new ERP module, don't modify the ledger*.
 3. **Scaling down better than commonly claimed.** ECS is only overkill when it means
-   archetypes, sparse sets, and query caching. A tiny ECS for Pac-Man is roughly 150
-   lines, less code than the OOP hierarchy and far more inspectable.
-4. **Explicit data flow.** Every system can be read in one sitting.
+   archetypes, sparse sets, and query caching. A tiny ECS is roughly 150 lines, less
+   code than an OOP hierarchy and far more inspectable.
+4. **Reapplication.** Because the shape is fixed, a new game is a new set of components
+   and systems, not a new architecture. That is what makes "build the next game from
+   scratch" a realistic plan instead of a fresh start each time.
+5. **Explicit data flow.** Every system can be read in one sitting.
 
 ## 4. What ECS does not give
 
@@ -81,33 +100,56 @@ new from scratch.
   not say what the systems should be. The real content of Pac-Man — ghosts pick a
   target tile, a shared pathfinder moves them, mode is an orthogonal state machine —
   still has to be understood. ECS removes architectural churn, not domain learning.
+  Every game brings its own domain problem, and that problem is the point.
 - **Easy debugging by default.** In OOP one breaks inside `Ghost::update`. In ECS one
   must ask which system touches an entity, and in what order. That is why the entity
-  inspector exists from day one.
+  inspector exists from day one of every game.
 
-## 5. Scope
+## 5. How the work is organised
 
-The artifact is a **single directory, roughly 1,000 lines, `make run`, done.**
+Each game is **one self-contained directory, roughly 1,000 lines, `make run`, done.**
+No shared engine, no shared runtime library, no build system spanning games. Games may
+copy small pieces of each other by hand — that is deliberate; copying is how the
+repeated shape becomes visible.
 
-Build order:
+Every game follows the same build order:
 
-1. **Write the tiniest possible ECS.** Entities as `uint32_t`; components as structs in
-   `std::unordered_map<Entity, T>` (or `std::vector<T>` indexed by entity where entities
-   are dense); systems as free functions. Target ~150 lines for the ECS core. No
-   templates, no archetypes, no reuse.
-2. **Model Pac-Man in ECS terms from the start.** System order:
-   `inputSystem` → `modeTimerSystem` → `targetingSystem` → `movementSystem` →
-   `collisionSystem` → `scoringSystem` → `renderSystem`.
-   For each stage, check: does it have clear inputs/outputs? Does it match the
-   pipeline instinct? If yes, the paradigm is already fluent.
-3. **Use biological intuition for the tricky parts.** Frightened-mode timer is a
-   hormone decay curve. Ghost-house release timer is a refractory period. Pinky's
-   four-tile lookahead is feed-forward prediction. These analogies carry reasoning when
-   the code is unfamiliar.
+1. **Write the tiniest possible ECS** in that game's directory. Entities as `uint32_t`;
+   components as structs in `std::unordered_map<Entity, T>` (or `std::vector<T>` indexed
+   by entity where entities are dense); systems as free functions. Target ~150 lines for
+   the ECS core. No templates, no archetypes, no reuse.
+2. **Model the game in ECS terms from the start.** Write the system pipeline down before
+   writing the systems — the equivalent of naming the middleware stages first.
+3. **Use existing intuition for the tricky parts.** Biological and web-pipeline
+   analogies carry reasoning when the code is unfamiliar: frightened-mode timers are
+   hormone decay curves, spawn delays are refractory periods, lookahead is feed-forward
+   prediction.
 4. **Build the entity inspector on day one** — `printEntity(world, id)` dumping all
    components. About 20 lines; analogous to logging request IDs in a web pipeline.
-5. **When ECS handles something awkwardly** (the maze is arguably not an entity), that
-   is the lesson: it teaches the boundary of the paradigm better than any tutorial.
+5. **When ECS handles something awkwardly**, that is the lesson. It teaches the boundary
+   of the paradigm better than any tutorial, and the boundary is knowledge the next game
+   inherits.
+
+### First exercise: Pac-Man
+
+System order, to be written before the systems themselves:
+
+`inputSystem` → `modeTimerSystem` → `targetingSystem` → `movementSystem` →
+`collisionSystem` → `scoringSystem` → `renderSystem`
+
+For each stage, check: does it have clear inputs/outputs? Does it match the pipeline
+instinct? If yes, the paradigm is already fluent.
+
+Domain specifics that belong to Pac-Man rather than to ECS: ghosts pick a target tile;
+a shared pathfinder moves them; mode is an orthogonal state machine; the maze is
+arguably not an entity, and that awkwardness is worth feeling.
+
+### After Pac-Man
+
+The next game is chosen to change one variable, not all of them: a different problem
+shape (a shooter, a Breakout, a Snake, a physics toy) written from scratch in a new
+directory, using the same four nouns. Finishing Pac-Man and stopping would fail this
+document's purpose — it would reproduce the original failure at a larger scale.
 
 ## 6. The discipline: the survey-form rule
 
@@ -141,6 +183,12 @@ Do not abstract until the concrete thing has been written three times.
    No runtime component removal unless it is needed. No variadic queries unless three
    components are genuinely queried together.
 
+The same rule governs *between* games, which is where the temptation is strongest. Two
+games sharing code is a coincidence. Three games sharing the same code is a pattern, and
+only then may a small shared core be extracted — still small, still the parts the games
+actually needed. Until the third game, each directory is written independently and
+copy-paste is the correct engineering choice.
+
 Kubernetes after three services, never for one survey.
 
 ## 7. Red lines
@@ -150,19 +198,22 @@ Forbidden, on sight:
 - ❌ `template<typename... Components>` in a query — a `for` loop over `positions` with
   `if (has<Velocity>(e))` is fine.
 - ❌ Archetype storage, chunked memory, SoA layout — that is an optimization for 10k+
-  entities. There are about ten. A map per component is correct.
+  entities. A game here has about ten. A map per component is correct.
 - ❌ A `System` base class with `virtual void update(World&)` — that is OOP reinvented
   inside ECS. Systems are free functions. A registry is a
   `std::vector<std::function<void(World&)>>` *if* runtime ordering is ever needed; it
   is not.
+- ❌ An engine, a shared game library, or a "reusable" ECS written before the third
+  game exists.
 - ❌ Serialization, reflection, editor integration — the Kubernetes of ECS.
 - ❌ A `Docs/` tree that grows beyond charters and notes like this one.
 
 Required:
 
 - ✅ Entities as `uint32_t`, components as plain structs, systems as free functions, one
-  `World` struct holding the maps.
-- ✅ An entity inspector.
+  `World` struct holding the maps — re-derived per game until the rule of three allows
+  otherwise.
+- ✅ An entity inspector in every game.
 - ✅ Hardcoded system order in the game loop — `modeTimer(); targeting(); movement();
   collision();` — not a plugin registry.
 
@@ -178,7 +229,8 @@ ECS is a genuine unifying paradigm, used heavily in AAA (Unity DOTS, Unreal Mass
 flecs). But:
 
 - Small or simple games often do not need ECS, and forcing it adds ceremony. Feeling
-  that friction is data, not failure.
+  that friction is data, not failure — and a game here is allowed to be small enough
+  that the ceremony is visible.
 - AAA games are ECS *plus* much else — asset pipelines, streaming, netcode, physics
   middleware — where ECS is one layer, not the whole. The "one methodology" framing is
   aspirational.
@@ -187,17 +239,29 @@ flecs). But:
 
 None of that undermines learning ECS first. Learning one paradigm deeply and then
 discovering its boundaries is far better pedagogy than sampling five shallowly, and ECS
-has the widest applicability across game sizes.
+has the widest applicability across game sizes. Discovering where it stops working —
+game by game, not by reading — is part of the curriculum.
 
 ## 9. Definition of done
 
-- A Pac-Man that runs and is playable.
-- Approximately 1,000 lines total, one directory, `make run`.
+Per game:
+
+- The game runs and is playable.
+- Approximately 1,000 lines, one directory, `make run`.
 - System order visible and hardcoded in the main loop.
 - An entity inspector reachable while the game runs.
 - Every line readable in one sitting; no hidden control flow.
-- No `Docs/` folder beyond this charter.
+- No `Docs/` folder inside the game's directory.
 
-Then **stop**. The stopping is the skill. The survey-form instinct — knowing when the
-artifact is disposable and complete — is the same instinct that identifies
-over-engineering, and it applies to game development too.
+For the repository:
+
+- More than one finished game, each built from scratch rather than adapted from the
+  last.
+- Evidence that the paradigm transfers: a game whose problem shape is unlike Pac-Man's,
+  expressed in the same four nouns.
+- If, and only if, the third game repeats the same code, a small extracted core — with
+  the games still runnable standalone.
+
+Meeting the Pac-Man items is the first milestone. It is not the goal, and it is not a
+reason to stop. The stopping that matters here is knowing when a *game* is complete and
+disposable; the repository itself keeps going, one small game at a time.
