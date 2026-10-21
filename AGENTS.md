@@ -38,6 +38,26 @@ Key constraints from that charter:
 - Lifting a red line requires the forcing game to exist and the lift to be recorded in
   the charter.
 
+## Editor configuration
+
+**Every game must open with zero editor diagnostics, and this is never something the user
+has to ask for.** When a game is added, ship its editor configuration in the same commit.
+
+- [`.vscode/c_cpp_properties.json`](.vscode/c_cpp_properties.json) is the shared, checked-in
+  configuration for Microsoft's C/C++ extension. It globs
+  `${workspaceFolder}/games/**/src`, so a new game under `games/` inherits C++20,
+  `-fobjc-arc`, and the include path automatically. Do not add per-game copies of it.
+- Each game still needs its own `compile_flags.txt` next to its `src/` (`-std=c++20`,
+  `-fobjc-arc`). clangd searches upward from the source file and does **not** read
+  `.vscode/`, so this is the one editor file that lives with the game rather than in
+  `.vscode/`.
+- If a game needs a flag the shared configuration cannot express — a framework header
+  path, a define, a different standard — extend `.vscode/c_cpp_properties.json` so it
+  applies to all games, or the game's `compile_flags.txt`, in the same commit that
+  introduces the need.
+- A game that builds but squiggles is not done. Verify with
+  `clangd --check=<file>` on each source file before calling it finished.
+
 ## Environment
 
 - Approval prompts are disabled in agent sessions; never request sandbox escalation.
