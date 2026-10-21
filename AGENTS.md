@@ -18,9 +18,13 @@ This repository is a workshop for building **a series of games from scratch, eac
 of the ECS paradigm**. The goal is the paradigm and the ability to start the next game in
 an empty directory with no engine and no tutorial — not any single game.
 
-Pac-Man is the **next exercise, not the objective**. It is a vehicle for learning the
-method; finishing it is a milestone, and stopping there fails the purpose. Each game
-lives in its own directory under `games/`, numbered in build order. Read
+The longer ambition is to learn **how ECS scales, from one entity to AAA-scale worlds**:
+storage layout, parallel scheduling, streaming, determinism, tooling. That climb is a
+ladder of rungs in [`Docs/PURPOSE.md`](Docs/PURPOSE.md) §6, and a rung is only entered
+when a game in this repository forces it. Do not import machinery from a higher rung
+because it seems modern; the current red lines are scoped to rungs 0–1.
+
+Each game lives in its own directory under `games/`, numbered in build order. Read
 [`Docs/PURPOSE.md`](Docs/PURPOSE.md) before making design decisions — it is the charter,
 and it takes precedence over convenience.
 
@@ -31,6 +35,8 @@ Key constraints from that charter:
 - Systems are free functions, invoked in a hardcoded order in the game loop.
 - Each game: one directory, roughly 1,000 lines, `make run`, with an entity inspector.
 - Copy-paste between games is correct until the same code appears three times.
+- Lifting a red line requires the forcing game to exist and the lift to be recorded in
+  the charter.
 
 ## Environment
 
