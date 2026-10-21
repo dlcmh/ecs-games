@@ -186,15 +186,25 @@ needs, then classify each part.
 
 Write as an architect presenting the design to a room, not as a specification read aloud.
 
-- Prefer speech to note form: "The sentence mentions the square and the rotation, but not the
-  clock — well, the clock happens to be required to make the rotation visible" rather than
-  "The sentence names A and B but not C".
+- Prefer speech to note form: "The requirements mention the square and the rotation, but not
+  the clock — well, the clock happens to be required to make the rotation visible" rather
+  than "The requirements name A and B but not C".
 - Mark the beat where the audience would ask a question: "well", "of course", "turns out",
   "happens to be", "which is why".
 - Let a sentence run to the length of a spoken breath. Three clipped declaratives in a row
   read as a table, not an explanation.
 - The marker has to carry reasoning, not padding: "well" is allowed when it introduces the
   answer to the objection the previous sentence raises.
+
+### Rule 10 — Talk about requirements, not sentences
+
+The requirements are the subject; their wording is not.
+
+- "The requirements mention the square and the rotation", not "the sentence mentions".
+- "The requirement for slowness hides two things", not "the word 'slowly' hides two things".
+- "Showing the square needs two parts", not "the word 'shows' needs two parts".
+- Quote requirement text only when the exact wording matters; otherwise describe what is
+  asked for. "This detail" is available when a single clause is meant.
 
 ## Teaching code
 
